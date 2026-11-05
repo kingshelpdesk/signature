@@ -60,7 +60,7 @@ button.alt{background:#fff;color:#1f3a68;border:1px solid #1f3a68}
 <script>
 var $=function(id){return document.getElementById(id)};
 function fill(){
-  var n=$('i-name').value.trim(),t=$('i-title').value.trim(),e=$('i-ext').value.trim(),m=$('i-mob').value.trim();
+  var n=$('i-name').value.trim().toUpperCase(),t=$('i-title').value.trim().toUpperCase(),e=$('i-ext').value.trim(),m=$('i-mob').value.trim();
   if(!n||!t){$('err').textContent='Please fill in name and title.';return false}
   $('s-name').textContent=n;$('s-title').textContent=t;$('s-ext').textContent=e;$('s-extwrap').style.display=e?'':'none';
   $('s-mob').textContent=m;$('s-mobrow').style.display=m?'':'none';
