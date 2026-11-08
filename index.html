@@ -49,6 +49,7 @@ button.alt{background:#fff;color:#1f3a68;border:1px solid #1f3a68}
 </td>
 </tr>
 </table>
+<p id="s-tail" style="margin:0;font-size:1pt;line-height:1pt;mso-line-height-rule:exactly;"><span style="font-size:1pt;line-height:1pt;">&nbsp;</span></p>
 </div></div>
 <div class="actions">
 <button id="copy">Copy signature</button>
@@ -70,13 +71,15 @@ $('f').addEventListener('submit',function(ev){ev.preventDefault();fill()});
 $('edit').onclick=function(){$('overlay').classList.remove('hidden');$('i-name').focus()};
 function sigHTML(){
   var c=$('sig').cloneNode(true),r=c.querySelector('#s-mobrow');
+  var tl=c.querySelector('#s-tail');if(tl)tl.parentNode.removeChild(tl);
   if(r&&r.style.display==='none')r.parentNode.removeChild(r);
   var x=c.querySelector('#s-extwrap');if(x&&x.style.display==='none')x.parentNode.removeChild(x);
   c.querySelectorAll('[id]').forEach(function(el){el.removeAttribute('id')});
-  return c.innerHTML.trim();
+  var tail='<p class="MsoNormal" style="margin:0;font-size:1pt;line-height:1pt;mso-line-height-rule:exactly;"><span style="font-size:1pt;line-height:1pt;">&nbsp;</span></p>';
+  return c.innerHTML.trim()+tail;
 }
 $('copy').onclick=function(){
-  var html=sigHTML(),text=$('sig').innerText;
+  var html=sigHTML(),text=$('sig').innerText.replace(/\s+$/,'');
   function fallback(){
     var r=document.createRange();r.selectNode($('sig'));var s=getSelection();s.removeAllRanges();s.addRange(r);
     document.execCommand('copy');s.removeAllRanges();done();
